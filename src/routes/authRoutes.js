@@ -1,6 +1,15 @@
 import express from 'express';
 import { body } from 'express-validator';
-import { register, login, getProfile, forgotPassword, resetPassword } from '../controllers/authController.js';
+import {
+  register,
+  login,
+  getProfile,
+  forgotPassword,
+  resetPassword,
+  setDocsPassword,
+  verifyDocsPassword,
+  resetDocsPassword,
+} from '../controllers/authController.js';
 import { protect } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
@@ -25,6 +34,11 @@ router.post(
 );
 
 router.get('/profile', protect, getProfile);
+
+// Docs Security Routes
+router.post('/docs-password/set', protect, setDocsPassword);
+router.post('/docs-password/verify', protect, verifyDocsPassword);
+router.post('/docs-password/reset', protect, resetDocsPassword);
 
 router.post('/forgot', [body('email').isEmail().withMessage('Valid email is required')], forgotPassword);
 router.post(

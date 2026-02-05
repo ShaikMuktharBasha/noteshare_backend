@@ -33,7 +33,7 @@ app.get('/health', (_req, res) => {
 });
 
 app.get('/', (req, res) => {
-  res.send('API is running...');
+  res.send('API is running.');
 });
 
 app.use(notFound);
